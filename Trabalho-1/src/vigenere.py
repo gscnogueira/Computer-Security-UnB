@@ -17,6 +17,8 @@ if __name__ == '__main__':
         args.msg = open(args.msg,'r').read().strip()
 
 
+    args.msg = args.msg.lower()
+
     if args.op =='encrypt':
         print(encrypt(args.msg, args.key))
     elif args.op == 'decrypt':
