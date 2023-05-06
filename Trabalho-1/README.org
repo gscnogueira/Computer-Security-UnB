@@ -41,3 +41,20 @@ As mensagens podem estar tanto em formato textual ou em um arquivo:
   $ python src/vigenere.py encrypt -k 'secret' file.txt
   hello world
 #+end_src
+
+** Ataque de Recuperação de Senha
+
+Para iniciar o ataque de recuperação de senha execute:
+
+#+begin_src shell
+ $ python src/vigenere.py break <mensagem>
+#+end_src
+
+Para quebrar o desafio 1, por exemplo, execute:
+
+#+begin_src shell
+ $ python src/vigenere.py break desafios/desafio1.txt
+#+end_src
+
+
+
