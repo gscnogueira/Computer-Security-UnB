@@ -1,0 +1,43 @@
+* Cifra de Vigenère
+
+** Cifrador
+
+Para cifrar uma mensagem execute o seguinte comando:
+
+#+begin_src shell
+  $ python src/vigenere.py encrypt -k <chave> <mensagem>
+#+end_src
+
+As mensagens podem estar tanto em formato textual ou em um arquivo:
+
+#+begin_src shell
+  $ python src/vigenere.py encrypt -k 'secret' 'hello world'
+  zincs pgvnu
+#+end_src
+
+#+begin_src shell
+  $ echo 'hello world' > file.txt
+  $ python src/vigenere.py encrypt -k 'secret' file.txt
+  zincs pgvnu
+#+end_src
+
+** Decifrador
+
+Para decifrar uma mensagem execute o seguinte comando:
+
+#+begin_src shell
+  $ python src/vigenere.py decrypt -k <chave> <mensagem>
+#+end_src
+
+As mensagens podem estar tanto em formato textual ou em um arquivo:
+
+#+begin_src shell
+  $ python src/vigenere.py decrypt -k 'secret' 'zincs pgvnu' 
+  hello world
+#+end_src
+
+#+begin_src shell
+  $ echo 'zincs pgvnu' > file.txt
+  $ python src/vigenere.py encrypt -k 'secret' file.txt
+  hello world
+#+end_src
