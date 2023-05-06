@@ -69,16 +69,11 @@ def encode(c): return CHARACTER_CODES[c]
 
 def decode(n): return CHARACTERS[n]
 
-def expand_key(msg, key):
-    times, rest = divmod(len(msg), len(key))
-    return key*times + key[:rest]
-
 def encrypt_char(m, k):
     return (decode((encode(m) + encode(k))%len(CHARACTERS))
             if m in CHARACTER_CODES else m)
 
 def encrypt(msg, key):
-    print(CHARACTER_CODES)
     key_it = cycle(key)
     return ''.join([encrypt_char(m,next(key_it)) if m in CHARACTER_CODES else m for m in msg])
 
@@ -141,26 +136,31 @@ def query_key_len(msg):
 
     return int(input('\nInsert a key length (from LEN column): '))
 
-def find_key(msg,key_len):
-    print('\nENGLISH:')
-    for group in get_groups(msg, key_len): print( break_char(group, 'EN'))
-    print('PORTUGUESE:')
-    for group in get_groups(msg, key_len): print( break_char(group, 'PT'))
+def find_key(msg, key_len, language):
+   return [break_char(group, language)
+           for group in get_groups(msg, key_len)]
 
-def try_again():
-    return input('\nWould you like to try another length?[y/n]') != 'n'
+def try_again(txt):
+    return input(txt) != 'n'
+
 def break_(msg):
     while True:
-        msg = preproc(msg)
-        key_len = query_key_len(msg)
-        find_key(msg,key_len)
-        if not try_again() : break
+        pp_msg = preproc(msg)
+        key_len = query_key_len(pp_msg)
 
-    
+        print('\nENGLISH:')
+        for i, char_list in enumerate(find_key(pp_msg,key_len, 'EN')):
+            print(f'{i}th:', char_list)
 
+        print('\nPORTUGUESE:')
+        for i, char_list in enumerate(find_key(pp_msg,key_len, 'PT')):
+            print(f'{i}th:', char_list)
 
-if __name__ == '__main__':
-    with open('desafio1.txt', 'r') as f:
-        break_(f.read())
+        if try_again('\nWould you like to insert a key do decrypt the text?[y/n]'):
+            key = input('Insert a key: ').strip()
+            print()
+            print(decrypt(msg, key))
 
+        if not try_again('\nWould you like to try another key length?[y/n]') :
+            break
 
