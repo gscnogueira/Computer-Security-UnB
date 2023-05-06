@@ -8,7 +8,7 @@ Para cifrar uma mensagem execute o seguinte comando:
   $ python src/vigenere.py encrypt -k <chave> <mensagem>
 #+end_src
 
-As mensagens podem estar tanto em formato textual ou em um arquivo:
+As mensagens podem estar tanto em formato textual como em um arquivo:
 
 #+begin_src shell
   $ python src/vigenere.py encrypt -k 'secret' 'hello world'
@@ -29,7 +29,7 @@ Para decifrar uma mensagem execute o seguinte comando:
   $ python src/vigenere.py decrypt -k <chave> <mensagem>
 #+end_src
 
-As mensagens podem estar tanto em formato textual ou em um arquivo:
+As mensagens podem estar tanto em formato textual como em um arquivo:
 
 #+begin_src shell
   $ python src/vigenere.py decrypt -k 'secret' 'zincs pgvnu' 
