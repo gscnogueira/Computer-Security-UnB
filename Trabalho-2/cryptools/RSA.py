@@ -70,17 +70,15 @@ def decrypt(message, s_key):
 def sign(message, private_key):
     n, d = private_key
     hash_value = (hashlib.sha3_256(message).digest())
-    print(hash_value)
-    print('------------------')
     hash_value = int.from_bytes(hash_value)
     sig = to_bytes(fexp(hash_value, d, mod=n))
-    base64.b64encode(sig)
-    print(sig)
+    sig = base64.b64encode(sig)
     return sig
 
 def verify(message, public_key, signature):
     n, e = public_key
     hash_value = (hashlib.sha3_256(message).digest())
+    signature = base64.b64decode(signature)
     signature = int.from_bytes(signature)
     m = to_bytes(fexp(signature, e, mod=n))
 

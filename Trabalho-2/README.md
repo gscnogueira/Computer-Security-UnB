@@ -90,7 +90,7 @@ Para decifrar o arquivo `chave_cifrada.txt`, que contém a chave AES, basta exec
 ```
 
 
-### Geração de Assinatura RSA
+## Geração de Assinatura RSA
 
 Para gerar uma assinatura do arquivo `msg.txt` fornecido o identificador de suas chaves por meio do seguinte comando
 
@@ -100,7 +100,7 @@ Para gerar uma assinatura do arquivo `msg.txt` fornecido o identificador de suas
 
 Esse comando gerará um arquivo que contém a assinatura. O nome desse arquivo será igual o nome da mensagem concatenado com `.sig`. Por exemplo, a assinatura do arquivo `msg.txt` será `msg.txt.sig`
 
-### Verificação de Assinatura RSA
+## Verificação de Assinatura RSA
 
 Para que seja verificada a assinatura do arquivo `msg.txt`, basta executar o seguinte comando:
 

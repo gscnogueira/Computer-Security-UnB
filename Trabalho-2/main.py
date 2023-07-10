@@ -11,7 +11,7 @@ if __name__ == '__main__':
     parser.add_argument('op',metavar='operation',
                         choices=['encrypt', 'decrypt', 'gen_key', 'sign', 'verify'],
                         help= """
-                        {encrypt, decrypt, gen_key}
+                        {encrypt, decrypt, gen_key, sign, verify}
                         """)
 
     parser.add_argument('type',metavar='type',
