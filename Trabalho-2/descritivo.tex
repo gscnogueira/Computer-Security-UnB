@@ -1,0 +1,87 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Gabriel Nogueira - 18/0113330}
+\date{}
+\title{Segurança Computacional\\\medskip
+\large Trabalho 2}
+\hypersetup{
+ pdfauthor={Gabriel Nogueira - 18/0113330},
+ pdftitle={Segurança Computacional},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={Portuguese}}
+\begin{document}
+
+\maketitle
+
+\section{Cifração e Decifração AES (chave 128 bits)}
+\label{sec:orga6a814a}
+\subsection{Geração da Chave de 128 bits}
+\label{sec:org46e0b4d}
+Para a geração de uma chave aleatória de 128 bits foram selecionados 16 bytes psedo-aleatórios por meio da função \texttt{getrandbits} do módulo \texttt{random} da linguagem python. Em seguida, esse valor foi convertido para o formato de string, para facilitar sua leitura do arquivo.
+\subsection{Cifração e decifração}
+\label{sec:orgbfea89a}
+Para cifrar uma mensagem, foi primeiro necessário dividi-la em blocos de 16 bytes (128 bits), para que pudessem ser processados um a um.
+Após divididos os blocos, cada bloco é tratado como uma matriz 4x4 de bytes, sendo assim, foram definidas as seguintes operações sobre os bytes da mensagem (\(M\)) e os bytes de uma chave(\(K_j\)):
+\begin{itemize}
+\item \texttt{add\_key}: \(M \oplus K_j\)
+\item \texttt{sub\_bytes}: cada byte de \(m_i\) é mapeado para um novo byte \(m_i'\)
+\item \texttt{shif\_rows}: faz uma permutação em cada linha de \(M\)
+\item \texttt{mix\_columns}: realiza uma transformação linear em cada coluna de \(M\)
+\end{itemize}
+
+Dessa forma, para criptografar um bloco (M), a partir da chave \(K_0\) foi necessário realizar a operação \(addkey(M, K_0)\), o que resulto na matriz de blocos denominada \(state\)
+
+Em seguida, a chave foi expandida em outras 10 chaves. Para as primeiras 9 chaves foi realizada a seguinte composição de funções:
+$$
+state = addkey(mixcolumns(shiftrows(sbox(state))), K_i)
+$$
+
+e por ultimo foi realizada a seguinte operação para a chave \(K_{10}\)
+
+$$
+state = addkey(shiftrows(subbytes(state))), K_{10})
+$$
+
+Para a decifração foi realizado um procedimento análogo, invertendo as operações, e utilizando as chaves em ordem contraria
+
+$$
+state =  imixcolumns(addkey(isubbytes(ishiftrows(state)), K_i))
+$$
+
+E por ultimo, 
+
+$$
+state = addkey(isubbytes(ishifrows(state))), K_{10})
+$$
+
+\section{Geração de chaves e cifra RSA}
+\label{sec:org807d8d9}
+Não foi possível completar o resto do relatório, mas tentei deixar o código o mais claro possível. Peço desculpas pelo inconveniente.
+\subsection{Geração de chaves}
+\label{sec:org3ae0cbb}
+\subsection{OEAP}
+\label{sec:org8b04d21}
+\subsection{Cifração/decifração assimétrica usando OEAP}
+\label{sec:org1f0268d}
+\section{Assinatura RSA}
+\label{sec:org6aa2cf2}
+\subsection{Assinatura da mensagem}
+\label{sec:org2be41c4}
+\subsection{Formatação do resultado}
+\label{sec:orgc5fcdeb}
+\section{Verificação}
+\label{sec:org40b006c}
+\end{document}
