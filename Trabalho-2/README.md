@@ -90,57 +90,22 @@ Para decifrar o arquivo `chave_cifrada.txt`, que contém a chave AES, basta exec
 ```
 
 
-# Casos de uso:
+### Geração de Assinatura RSA
 
-Dada a mensagem M contida no arquivo msg.txt, são apresentados os seguintes casos de uso
+Para gerar uma assinatura do arquivo `msg.txt` fornecido o identificador de suas chaves por meio do seguinte comando
 
-## Cifração de uma mensagem com AES:
-
-M, k -> AES_k(M)
-
-Geração de chave
 ```
-python main.py gen_key aes -k chave_aes
+ python main.py sign rsa -k chave_rsa -m msg.txt
 ```
 
+Esse comando gerará um arquivo que contém a assinatura. O nome desse arquivo será igual o nome da mensagem concatenado com `.sig`. Por exemplo, a assinatura do arquivo `msg.txt` será `msg.txt.sig`
 
-Cifração
+### Verificação de Assinatura RSA
+
+Para que seja verificada a assinatura do arquivo `msg.txt`, basta executar o seguinte comando:
+
 ```
- python main.py encrypt aes -k chave_aes -m msg.txt > cmsg.txt
-
+python main.py verify rsa -k chave_rsa -m msg.txt
 ```
 
 
-
-## Cifra híbrida:
-Enviando mensagem M para usuário A, (KA_p, KA_s) = chaves assimétricas de A
-C = (AES_k(M) , RSA_KA_p(k))
-
-Geração de chaves
-```
-python main.py gen_key rsa -k user_a
-```
-
-Cifrando a chave `chave_aes` com o a chave pública de A
-```
-python main.py encrypt rsa -k user_a -m chave_aes.key > chave_cifrada.txt
-```
-
-## Cifra híbrida (autenticação mútua):
-Usuário B enviando mensagem M para usuário A
-- (KA_p, KA_s) = chaves assimétricas de A;
-- (KB_p, KB_s) = chaves assimétricas de B
-
-C = (AES_k(M) , RSA_KB_s (RSA_KA_p(k)), KB_p)
-
-4. Geração de Assinatura de A
-
-Usuário B enviando mensagem M para usuário A,
-- (KA_p, KA_s) = chaves assimétricas de A;
-- H(.)=função de hash
-
-Sign = (AES_k(M) , RSA_KA_s(H(AES_k(M))), KA_p)
-
-5. Verificação da assinatura
-
-RSA_KA_s (RSA_KA_s(H(AES_k(M)))) = H(AES_k(M)) ? 
