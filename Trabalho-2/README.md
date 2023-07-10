@@ -94,12 +94,13 @@ Para decifrar o arquivo `chave_cifrada.txt`, que contém a chave AES, basta exec
 
 Dada a mensagem M contida no arquivo msg.txt, são apresentados os seguintes casos de uso
 
-1. Cifração de uma mensagem com AES: M, k -> AES_k(M)
+## Cifração de uma mensagem com AES: M, k -> AES_k(M)
 
 Geração de chave
-    ```
-    python main.py gen_key aes -k chave_aes
-    ```
+```
+python main.py gen_key aes -k chave_aes
+```
+
 
 Cifração
 ```
