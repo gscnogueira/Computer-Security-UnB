@@ -1,4 +1,8 @@
 #  Gerador/Verificador de Assinaturas
+- Aluno: Gabriel da Silva Corvino Nogueira
+- Matricula: 180113330
+- Github: (https://github.com/gscnogueira)
+- Python 3.11.3
 
 ```
 usage: main.py [-h] -k KEY_ID [-m MESSAGE_FILE] operation type
